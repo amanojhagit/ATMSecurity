@@ -1,4 +1,4 @@
-﻿using ATMDemo.Data;
+﻿/*using ATMDemo.Data;
 using ATMDemo.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -71,3 +71,4 @@ namespace ATMDemo.Controllers
     }
 
 }
+*/

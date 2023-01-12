@@ -13,17 +13,11 @@ namespace ATMDemo.Data
         public DbSet<Admin> User { get; set; }
         public DbSet<Transaction> Transactions { get; set; }
 
+      
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Transaction>()
-                .Property(t => t.TransactionAmount)
-                .HasColumnType("decimal(18,2)");
-
-            modelBuilder.Entity<Account>()
-                .Property(t => t.Amount)
-                .HasColumnType("decimal(18,2)");
+            //calling COnfigureAccounts in ModelBuilderExtensions 
+            modelBuilder.ConfigureAccounts();
         }
-
-
     }
 }

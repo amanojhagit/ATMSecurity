@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ATMDemo.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230111083308_TransactionType")]
-    partial class TransactionType
+    [Migration("20230112095408_AccountNo_auto")]
+    partial class AccountNoauto
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -35,9 +35,8 @@ namespace ATMDemo.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("AccountNo")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("AccountNo")
+                        .HasColumnType("int");
 
                     b.Property<string>("AccountType")
                         .IsRequired()
@@ -50,9 +49,8 @@ namespace ATMDemo.Migrations
                     b.Property<decimal>("Amount")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<string>("DateOfOpened")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime>("DateOfOpened")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("FingerprintID")
                         .IsRequired()
@@ -76,6 +74,9 @@ namespace ATMDemo.Migrations
 
                     b.HasKey("ID");
 
+                    b.HasAlternateKey("AccountNo")
+                        .HasName("AccountNo_Unique");
+
                     b.ToTable("Accounts");
                 });
 
@@ -93,9 +94,12 @@ namespace ATMDemo.Migrations
 
                     b.Property<string>("UserName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
+
+                    b.HasAlternateKey("UserName")
+                        .HasName("UserName_Unique");
 
                     b.ToTable("User");
                 });
@@ -106,9 +110,8 @@ namespace ATMDemo.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("AccountNo")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("AccountNo")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
