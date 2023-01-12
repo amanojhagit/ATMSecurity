@@ -81,7 +81,7 @@ namespace ATMDemo.Controllers
 
         //PUT /accounts/{id}: update an existing account
         [HttpPut("{id}")]
-        public IActionResult UpdateAccount(Guid id, [FromBody] Account account)
+        public IActionResult UpdateAccount(Guid id, [FromBody] AccountCreateDto accountCreateDto)
         {
             try
             {
@@ -90,18 +90,15 @@ namespace ATMDemo.Controllers
                 {
                     return NotFound();
                 }
-
-                existingAccount.AccountNo = account.AccountNo;
-                existingAccount.AccountName = account.AccountName;
-                existingAccount.Amount = account.Amount;
-                existingAccount.Address = account.Address;
-                existingAccount.PhoneNo = account.PhoneNo;
-                existingAccount.Passport = account.Passport;
-                existingAccount.DateOfOpened = account.DateOfOpened;
-                existingAccount.AccountType = account.AccountType;
-                existingAccount.FingerprintID = account.FingerprintID;
-                existingAccount.SMS = account.SMS;
-                existingAccount.SMSport = account.SMSport;
+                existingAccount.AccountName = accountCreateDto.AccountName;
+                existingAccount.Amount = accountCreateDto.Amount;
+                existingAccount.Address = accountCreateDto.Address;
+                existingAccount.PhoneNo = accountCreateDto.PhoneNo;
+                existingAccount.Passport = accountCreateDto.Passport;
+                existingAccount.AccountType = accountCreateDto.AccountType;
+                existingAccount.FingerprintID = accountCreateDto.FingerprintID;
+                existingAccount.SMS = accountCreateDto.SMS;
+                existingAccount.SMSport = accountCreateDto.SMSport;
 
                 _context.Accounts.Update(existingAccount);
                 _context.SaveChanges();
